@@ -1,8 +1,8 @@
 import '@mantine/core/styles.css';
 import { AppShell, Burger, Group, MantineProvider } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { Outlet } from 'react-router';
 import FireIcon from './assets/fire.svg?react'
-import { Content } from './Content';
 import { theme } from './theme';
 
 export const App = () => {
@@ -38,7 +38,7 @@ export const App = () => {
                 </AppShell.Header>
                 <AppShell.Navbar p="md" />
                 <AppShell.Main>
-                    <Content />
+                    <Outlet />
                 </AppShell.Main>
             </AppShell>
         </MantineProvider>
