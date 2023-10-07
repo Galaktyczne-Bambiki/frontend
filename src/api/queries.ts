@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 import { apiClient } from './client';
-import { FireReportData, FireReport, FirePoint, FirePointsRequestParams } from './models';
+import { FireReportData, FireReport, FirePoint, FirePointsRequestParams, FireTracker } from './models';
 
 export const fireReportsQuery = queryOptions({
     queryKey: ['fireReports', 'all'],
@@ -11,6 +11,12 @@ export const fireReportsQuery = queryOptions({
 export const firePointsQuery = (searchParams: FirePointsRequestParams) => queryOptions({
     queryKey: ['firePoints', searchParams],
     queryFn: () => apiClient.get('fire-points', { searchParams }).json<Array<FirePoint>>(),
+    refetchInterval: 60_000
+})
+
+export const fireTrackersQuery = (date: string) => queryOptions({
+    queryKey: ['fireTrackers', { date }],
+    queryFn: () => apiClient.get('temperature-reports/max', { searchParams: { date } }).json<Array<FireTracker>>(),
     refetchInterval: 60_000
 })
 

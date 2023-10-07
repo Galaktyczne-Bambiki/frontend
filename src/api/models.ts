@@ -12,6 +12,12 @@ export type FirePoint = {
     confidence: 'Low' | 'Nominal' | 'High',
 }
 
+export type FireTracker = {
+	latitude: number,
+    longitude: number,
+    celsiusValue: number,
+}
+
 export type FirePointsRequestParams = {
 	South: string,
 	East: string,

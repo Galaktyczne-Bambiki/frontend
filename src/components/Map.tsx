@@ -4,10 +4,11 @@ import { useDebouncedValue } from '@mantine/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { format, getUnixTime, subMonths, fromUnixTime } from 'date-fns';
 import { Proj, bounds, point, Map as MapType, LatLng } from 'leaflet';
-import { FunctionComponent, useRef, useState } from 'react';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { LayersControl, MapContainer, TileLayer, WMSTileLayer } from 'react-leaflet';
 import { FireMarkers } from './FireMarkers';
 import { FirePoints } from './FirePoints';
+import { FireTrackers } from './FireTrackers';
 import styles from './Map.module.css'
 import { fireReportsQuery } from '../api/queries';
 import FireMarkerIcon from '../assets/fireMarker.svg?react'
@@ -40,20 +41,27 @@ export const Map: FunctionComponent = () => {
         }
     );
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(({ coords }) => {
+            mapRef.current?.panTo(new LatLng(coords.latitude, coords.longitude))
+        });
+    }, [])
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.mapContainerWrapper}>
                 <MapContainer
                     center={[0, 0]}
-                    zoom={0}
+                    zoom={5}
                     maxZoom={15}
-                    minZoom={2}
+                    minZoom={5}
                     // crs={my_EPSG_4326}
                     className={styles.mapContainer}
                     ref={mapRef}
                 >
                     <FireMarkers />
                     <FirePoints date={debouncedDate} />
+                    <FireTrackers date={debouncedDate} />
                     <LayersControl position="topright">
                         <LayersControl.Overlay
                             checked
