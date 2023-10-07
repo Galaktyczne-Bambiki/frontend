@@ -1,14 +1,18 @@
 import '@mantine/core/styles.css';
 import 'leaflet/dist/leaflet.css'
-import { AppShell, Burger, Group, MantineProvider } from '@mantine/core';
+import { AppShell, Burger, Group, MantineProvider, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import styles from './App.module.css'
+import { IconMap2, IconInfoSquare, IconReportAnalytics } from '@tabler/icons-react';
 import { Outlet } from 'react-router';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
+import styles from './App.module.css'
 import FireIcon from './assets/fire.svg?react'
 import { theme } from './theme';
 
 export const App = () => {
     const [opened, { toggle }] = useDisclosure();
+    const location = useLocation();
 
     return (
         <MantineProvider theme={theme}>
@@ -38,7 +42,41 @@ export const App = () => {
                         </b>
                     </Group>
                 </AppShell.Header>
-                <AppShell.Navbar p="md" />
+                <AppShell.Navbar p="md">
+                    <NavLink
+                        to="/"
+                        component={Link}
+                        active={location.pathname === '/'}
+                        label="Map"
+                        leftSection={(
+                            <IconMap2
+                                stroke={1.5}
+                            />
+                        )}
+                    />
+                    <NavLink
+                        to="/about"
+                        active={location.pathname === '/about'}
+                        component={Link}
+                        label="About"
+                        leftSection={(
+                            <IconInfoSquare
+                                stroke={1.5}
+                            />
+                        )}
+                    />
+                    <NavLink
+                        to="/report"
+                        active={location.pathname === '/report'}
+                        component={Link}
+                        label="Report fire"
+                        leftSection={(
+                            <IconReportAnalytics
+                                stroke={1.5}
+                            />
+                        )}
+                    />
+                </AppShell.Navbar>
                 <AppShell.Main className={styles.main}>
                     <div className={styles.mainWrapper}>
                         <Outlet />
