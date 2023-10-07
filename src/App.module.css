@@ -2,6 +2,7 @@
 	--app-shell-padding: 0px;
 
 	display: flex;
+	height: 100dvh;
 }
 
 .mainWrapper {

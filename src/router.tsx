@@ -1,8 +1,8 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { About } from './components/About';
+import { Map } from './components/Map';
 import { Report } from './components/Report';
-import { Content } from './Content';
 
 export const router = createBrowserRouter([
     {
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Content />
+                element: <Map />
             },
             {
                 path: '/report',

@@ -1,0 +1,33 @@
+.mapContainer {
+	flex: 1;
+}
+
+.dateControlPanel {
+	z-index: 1000;
+	padding: 16px;
+}
+
+.mapContainerWrapper {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.wrapper {
+	display: flex;
+	flex: 1;
+	flex-direction: row;
+	min-height: 0;
+}
+
+.reportsPane {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+}
+
+.list {
+	overflow: auto;
+	flex: 1;
+	position: relative;
+}
