@@ -1,0 +1,10 @@
+{
+	"root": true,
+	"extends": [
+		"@ceski23/eslint-config"
+	],
+	"ignorePatterns": [
+		"postcss.config.js",
+		"vite.config.ts"
+	]
+}
