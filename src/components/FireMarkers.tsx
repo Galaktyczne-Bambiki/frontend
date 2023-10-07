@@ -22,7 +22,8 @@ export const FireMarkers: FunctionComponent = () => {
                     <Marker
                         key={fireReportId}
                         position={{
-                            lat: latitude, lng: longitude
+                            lat: latitude,
+                            lng: longitude
                         }}
                         icon={new Icon({
                             iconUrl: fireIcon,

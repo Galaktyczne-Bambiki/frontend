@@ -1,10 +1,17 @@
 import { queryOptions } from '@tanstack/react-query';
 import { apiClient } from './client';
-import { FireReportData, FireReport } from './models';
+import { FireReportData, FireReport, FirePoint, FirePointsRequestParams } from './models';
 
 export const fireReportsQuery = queryOptions({
     queryKey: ['fireReports', 'all'],
-    queryFn: () => apiClient.get('fire-reports/all').json<Array<FireReport>>()
+    queryFn: () => apiClient.get('fire-reports/all').json<Array<FireReport>>(),
+    refetchInterval: 60_000
+})
+
+export const firePointsQuery = (searchParams: FirePointsRequestParams) => queryOptions({
+    queryKey: ['firePoints', searchParams],
+    queryFn: () => apiClient.get('fire-points', { searchParams }).json<Array<FirePoint>>(),
+    refetchInterval: 60_000
 })
 
 export const reportMutation = ({

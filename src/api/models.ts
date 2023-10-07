@@ -5,6 +5,21 @@ export type FireReport = {
 	longitude: number,
 }
 
+export type FirePoint = {
+	latitude: number,
+    longitude: number,
+    dateUtc: string,
+    confidence: 'Low' | 'Nominal' | 'High',
+}
+
+export type FirePointsRequestParams = {
+	South: string,
+	East: string,
+	West: string,
+	North: string,
+	date: string,
+}
+
 export type FireReportRequest = {
 	description?: string,
 	lat?: number,

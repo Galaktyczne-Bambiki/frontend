@@ -1,17 +1,20 @@
 import 'proj4leaflet'
 import { List, LoadingOverlay, NavLink, Slider, Text } from '@mantine/core';
+import { useDebouncedValue } from '@mantine/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { format, getUnixTime, subMonths, fromUnixTime } from 'date-fns';
 import { Proj, bounds, point, Map as MapType, LatLng } from 'leaflet';
 import { FunctionComponent, useRef, useState } from 'react';
 import { LayersControl, MapContainer, TileLayer, WMSTileLayer } from 'react-leaflet';
 import { FireMarkers } from './FireMarkers';
+import { FirePoints } from './FirePoints';
 import styles from './Map.module.css'
 import { fireReportsQuery } from '../api/queries';
 import FireMarkerIcon from '../assets/fireMarker.svg?react'
 
 export const Map: FunctionComponent = () => {
     const [date, setDate] = useState(getUnixTime(new Date()));
+    const [debouncedDate] = useDebouncedValue(date, 300);
     const fireReports = useQuery(fireReportsQuery);
     const mapRef = useRef<MapType>(null)
 
@@ -47,11 +50,10 @@ export const Map: FunctionComponent = () => {
                     minZoom={2}
                     // crs={my_EPSG_4326}
                     className={styles.mapContainer}
-                    bounceAtZoomLimits
-                    bounds={[[-180, -90], [180, 90]]}
                     ref={mapRef}
                 >
                     <FireMarkers />
+                    <FirePoints date={debouncedDate} />
                     <LayersControl position="topright">
                         <LayersControl.Overlay
                             checked
@@ -136,9 +138,10 @@ export const Map: FunctionComponent = () => {
                     <Slider
                         min={getUnixTime(subMonths(new Date(), 1))}
                         max={getUnixTime(new Date())}
+                        step={86400}
                         value={date}
                         onChange={setDate}
-                        label={value => fromUnixTime(value).toISOString()}
+                        label={value => format(fromUnixTime(value), 'PPP')}
                     />
                 </div>
             </div>
@@ -153,6 +156,7 @@ export const Map: FunctionComponent = () => {
                     <LoadingOverlay visible={fireReports.isLoading} />
                     {fireReports.data?.map(report => (
                         <NavLink
+                            key={report.fireReportId}
                             label={report.description ?? '(no description)'}
                             leftSection={<FireMarkerIcon />}
                             onClick={() => {

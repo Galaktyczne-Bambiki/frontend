@@ -45,12 +45,16 @@ export const App = () => {
                         </b>
                     </Group>
                 </AppShell.Header>
-                <AppShell.Navbar p="md">
+                <AppShell.Navbar
+                    p="md"
+                    zIndex={1001}
+                >
                     <NavLink
                         to="/"
                         component={Link}
                         active={location.pathname === '/'}
                         label="Map"
+                        onClick={toggle}
                         leftSection={(
                             <IconMap2
                                 stroke={1.5}
@@ -62,6 +66,7 @@ export const App = () => {
                         active={location.pathname === '/about'}
                         component={Link}
                         label="About"
+                        onClick={toggle}
                         leftSection={(
                             <IconInfoSquare
                                 stroke={1.5}
@@ -73,6 +78,7 @@ export const App = () => {
                         active={location.pathname === '/report'}
                         component={Link}
                         label="Report fire"
+                        onClick={toggle}
                         leftSection={(
                             <IconReportAnalytics
                                 stroke={1.5}
