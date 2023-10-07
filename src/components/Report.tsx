@@ -62,7 +62,7 @@ export const Report = () => {
     }
 
     return (
-        <Container size="xl"  >
+        <Container size="lg">
             {reportFire.isSuccess ?  (
                 <Notification
                     className={styles['success-notification']}
