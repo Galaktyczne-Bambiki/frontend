@@ -1,5 +1,6 @@
 import 'proj4leaflet'
 import { Slider } from '@mantine/core';
+import { useColorScheme } from '@mantine/hooks';
 import { format, getUnixTime, subMonths, fromUnixTime } from 'date-fns';
 import { Proj, bounds, point } from 'leaflet';
 import { FunctionComponent, useState } from 'react';
@@ -9,6 +10,7 @@ import styles from './Content.module.css'
 
 export const Content: FunctionComponent = () => {
     const [date, setDate] = useState(getUnixTime(new Date()));
+    const colorScheme = useColorScheme()
 
     const my_EPSG_4326 = new Proj.CRS(
         'EPSG:4326',
@@ -50,7 +52,12 @@ export const Content: FunctionComponent = () => {
                         checked
                         name="New overlay"
                     >
-                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                        <TileLayer url={
+                            colorScheme === 'dark'
+                                ? 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+                                : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                        }
+                        />
                     </LayersControl.Overlay>
                     <LayersControl.Overlay
                         name="Terrain"

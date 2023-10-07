@@ -15,7 +15,10 @@ export const App = () => {
     const location = useLocation();
 
     return (
-        <MantineProvider theme={theme}>
+        <MantineProvider
+            theme={theme}
+            defaultColorScheme="auto"
+        >
             <AppShell
                 header={{ height: { base: 60, md: 70, lg: 80 } }}
                 navbar={{
