@@ -103,7 +103,6 @@ export const Report = () => {
                 <Group
                     mt="lg"
                 >
-
                     <FileButton
                         resetRef={resetRef}
                         onChange={file => {form.setFieldValue('file', file)}}
@@ -125,18 +124,29 @@ export const Report = () => {
                     >
                         Reset
                     </Button>
+                    <Group className={styles['image-section']}>
+                        {
+                            form.values.file ? (
+                                <img
+                                    alt="fire"
+                                    src={URL.createObjectURL(form.values.file)}
+                                />
+                            ) :  undefined
+                        }
 
-                    {form.values.file && (
-                        <Text
-                            size="sm"
-                            ta="center"
-                            mt="sm"
-                        >
-                            Picked file:
-                            {' '}
-                            {form.values.file.name}
-                        </Text>
-                    )}
+                        {form.values.file && (
+                            <Text
+                                size="sm"
+                                ta="center"
+                            >
+
+                                Picked file:
+                                {' '}
+                                {form.values.file.name}
+                            </Text>
+                        )}
+                    </Group>
+
                 </Group>
                 <Text
                     c="red"
