@@ -52,12 +52,7 @@ export const Content: FunctionComponent = () => {
                         checked
                         name="New overlay"
                     >
-                        <TileLayer url={
-                            colorScheme === 'dark'
-                                ? 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
-                                : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                        }
-                        />
+                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     </LayersControl.Overlay>
                     <LayersControl.Overlay
                         name="Terrain"
