@@ -2,8 +2,8 @@ import '@mantine/core/styles.css';
 import 'leaflet/dist/leaflet.css'
 import { AppShell, Burger, Group, MantineProvider } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import styles from './App.module.css'
 import { Outlet } from 'react-router';
+import styles from './App.module.css'
 import FireIcon from './assets/fire.svg?react'
 import { theme } from './theme';
 

@@ -37,7 +37,7 @@ export const Content: FunctionComponent = () => {
             <MapContainer
                 center={[0, 0]}
                 zoom={0}
-                maxZoom={8}
+                maxZoom={15}
                 minZoom={2}
                 // crs={my_EPSG_4326}
                 className={styles.mapContainer}

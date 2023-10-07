@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 import { apiClient } from './client';
-import { WeatherEntry } from './models';
+import { FireReport } from './models';
 
-export const weatherQuery = queryOptions({
-    queryKey: ['weather'],
-    queryFn: () => apiClient.get('WeatherForecast').json<Array<WeatherEntry>>()
+export const fireReportsQuery = queryOptions({
+    queryKey: ['fireReports', 'all'],
+    queryFn: () => apiClient.get('fire-reports/all').json<Array<FireReport>>()
 })

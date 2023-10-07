@@ -1,39 +1,50 @@
+import { LoadingOverlay, Text } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 import { Icon } from 'leaflet';
-import { FunctionComponent, useState } from 'react';
-import { useMapEvent, Marker } from 'react-leaflet';
+import { FunctionComponent } from 'react';
+import { Popup, Marker } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster'
+import styles from './FireMarkers.module.css'
+import { fireReportsQuery } from '../api/queries';
 import fireIcon from '../assets/fireMarker.svg'
 
-type FireReport = {
-	id: string,
-	lat: number,
-	lng: number,
-}
-
 export const FireMarkers: FunctionComponent = () => {
-    const [fireReports, setFireReports] = useState<Array<FireReport>>([]);
+    const fireReports = useQuery(fireReportsQuery);
 
-    useMapEvent('click', event => {
-        setFireReports(prev => prev.concat({
-            id: crypto.randomUUID(),
-            lat: event.latlng.lat,
-            lng: event.latlng.lng
-        }))
-    })
     return (
         <>
-            {fireReports.map(({ id, lat, lng }) => (
-                <Marker
-                    key={id}
-                    position={{
-                        lat, lng
-                    }}
-                    icon={new Icon({
-                        iconUrl: fireIcon,
-                        iconAnchor: [16, 16]
-                    })}
-
-                />
-            ))}
+            <LoadingOverlay visible={fireReports.isLoading} />
+            <MarkerClusterGroup
+                chunkedLoading
+                showCoverageOnHover
+            >
+                {fireReports.data?.map(({ description, fireReportId, latitude, longitude }) => (
+                    <Marker
+                        key={fireReportId}
+                        position={{
+                            lat: latitude, lng: longitude
+                        }}
+                        icon={new Icon({
+                            iconUrl: fireIcon,
+                            iconAnchor: [16, 16]
+                        })}
+                        title={description}
+                    >
+                        <Popup>
+                            <img
+                                src={`${import.meta.env.VITE_API_URL}/fire-reports/${fireReportId}/image`}
+                                alt={description}
+                                className={styles.image}
+                            />
+                            {description && (
+                                <Text>
+                                    {description}
+                                </Text>
+                            )}
+                        </Popup>
+                    </Marker>
+                ))}
+            </MarkerClusterGroup>
         </>
     );
 };
