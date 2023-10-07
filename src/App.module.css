@@ -1,0 +1,12 @@
+.main {
+	--app-shell-padding: 0px;
+
+	display: flex;
+}
+
+.mainWrapper {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	flex: 1;
+}

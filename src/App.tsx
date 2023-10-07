@@ -1,6 +1,8 @@
 import '@mantine/core/styles.css';
+import 'leaflet/dist/leaflet.css'
 import { AppShell, Burger, Group, MantineProvider } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import styles from './App.module.css'
 import { Outlet } from 'react-router';
 import FireIcon from './assets/fire.svg?react'
 import { theme } from './theme';
@@ -37,8 +39,10 @@ export const App = () => {
                     </Group>
                 </AppShell.Header>
                 <AppShell.Navbar p="md" />
-                <AppShell.Main>
-                    <Outlet />
+                <AppShell.Main className={styles.main}>
+                    <div className={styles.mainWrapper}>
+                        <Outlet />
+                    </div>
                 </AppShell.Main>
             </AppShell>
         </MantineProvider>
