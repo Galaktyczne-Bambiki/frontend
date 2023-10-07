@@ -1,5 +1,5 @@
-# Mantine Vite template
+## Enviroment Variables
 
-Get started with the template by clicking `Use this template` button on the top of the page.
-
-[Documentation](https://mantine.dev/guides/vite/)
+```
+VITE_API_URL=http://localhost:5000/
+```

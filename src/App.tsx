@@ -2,6 +2,7 @@ import '@mantine/core/styles.css';
 import { AppShell, Burger, Group, MantineProvider } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import FireIcon from './assets/fire.svg?react'
+import { Content } from './Content';
 import { theme } from './theme';
 
 export const App = () => {
@@ -36,7 +37,9 @@ export const App = () => {
                     </Group>
                 </AppShell.Header>
                 <AppShell.Navbar p="md" />
-                <AppShell.Main />
+                <AppShell.Main>
+                    <Content />
+                </AppShell.Main>
             </AppShell>
         </MantineProvider>
     );
