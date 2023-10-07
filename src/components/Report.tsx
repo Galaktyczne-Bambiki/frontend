@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import { Alert, Button, Container, FileButton, Group, Switch, Text, Textarea, Title, Notification } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconInfoCircle, IconCheck, IconX } from '@tabler/icons-react';
@@ -21,9 +20,9 @@ export const Report = () => {
     const resetRef = useRef<() => void>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const reportFire = useMutation<void, any, FireReportData>({
-        ...reportMutation, onSettled: () => {
-            form.reset()
-        } },)
+        ...reportMutation,
+        onSettled: () => form.reset()
+    })
     const clearFile = () => {
         form.setFieldValue('file', null)
         resetRef.current?.();
@@ -177,6 +176,7 @@ export const Report = () => {
                     mt="xl"
                     color="indigo"
                     type="submit"
+                    loading={reportFire.isPending}
                 >
                     Report
                 </Button>
