@@ -1,8 +1,8 @@
-export type WeatherEntry = {
-	date: string,
-	temperatureC: number,
-	temperatureF: number,
-	summary: string,
+export type FireReport = {
+	fireReportId: number,
+	description: string,
+	latitude: number,
+	longitude: number,
 }
 
 export type FireReportRequest = {

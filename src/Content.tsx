@@ -4,6 +4,7 @@ import { format, getUnixTime, subMonths, fromUnixTime } from 'date-fns';
 import { Proj, bounds, point } from 'leaflet';
 import { FunctionComponent, useState } from 'react';
 import { LayersControl, MapContainer, TileLayer, WMSTileLayer } from 'react-leaflet';
+import { FireMarkers } from './components/FireMarkers';
 import styles from './Content.module.css'
 
 export const Content: FunctionComponent = () => {
@@ -36,16 +37,22 @@ export const Content: FunctionComponent = () => {
             <MapContainer
                 center={[0, 0]}
                 zoom={0}
-                maxZoom={8}
+                maxZoom={15}
                 minZoom={2}
-                crs={my_EPSG_4326}
+                // crs={my_EPSG_4326}
                 className={styles.mapContainer}
                 bounceAtZoomLimits
                 bounds={[[-180, -90], [180, 90]]}
             >
+                <FireMarkers />
                 <LayersControl position="topright">
                     <LayersControl.Overlay
                         checked
+                        name="New overlay"
+                    >
+                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                    </LayersControl.Overlay>
+                    <LayersControl.Overlay
                         name="Terrain"
                     >
                         <TileLayer
@@ -55,7 +62,6 @@ export const Content: FunctionComponent = () => {
                         />
                     </LayersControl.Overlay>
                     <LayersControl.Overlay
-                        checked
                         name="Thermal anomalies"
                     >
                         <WMSTileLayer
@@ -77,7 +83,6 @@ export const Content: FunctionComponent = () => {
                     </LayersControl.Overlay>
                     <LayersControl.Overlay
                         name="Borders"
-                        checked
                     >
                         <TileLayer
                             url={`https://gibs-{s}.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?${new URLSearchParams({
@@ -99,7 +104,6 @@ export const Content: FunctionComponent = () => {
                     </LayersControl.Overlay>
                     <LayersControl.Overlay
                         name="Labels"
-                        checked
                     >
                         <TileLayer
                             url={`https://gibs-{s}.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?${new URLSearchParams({
