@@ -1,6 +1,5 @@
 import 'proj4leaflet'
 import { Slider } from '@mantine/core';
-import { useColorScheme } from '@mantine/hooks';
 import { format, getUnixTime, subMonths, fromUnixTime } from 'date-fns';
 import { Proj, bounds, point } from 'leaflet';
 import { FunctionComponent, useState } from 'react';
@@ -10,7 +9,6 @@ import styles from './Content.module.css'
 
 export const Content: FunctionComponent = () => {
     const [date, setDate] = useState(getUnixTime(new Date()));
-    const colorScheme = useColorScheme()
 
     const my_EPSG_4326 = new Proj.CRS(
         'EPSG:4326',
