@@ -6,5 +6,8 @@
 	"ignorePatterns": [
 		"postcss.config.js",
 		"vite.config.ts"
-	]
+	],
+	"rules": {
+		"import/extensions": "off"
+	}
 }
