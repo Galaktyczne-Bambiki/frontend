@@ -27,7 +27,7 @@ export const Content: FunctionComponent = () => {
                     {weather.date}
                     :
                     {' '}
-                    {weather.summary}
+                    {weather.temperatureC}
                 </p>
             ))}
         </Box>
