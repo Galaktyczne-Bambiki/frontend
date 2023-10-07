@@ -40,7 +40,9 @@ export const App = () => {
                 </AppShell.Header>
                 <AppShell.Navbar p="md" />
                 <AppShell.Main className={styles.main}>
-                    <Content />
+                    <div className={styles.mainWrapper}>
+                        <Content />
+                    </div>
                 </AppShell.Main>
             </AppShell>
         </MantineProvider>
