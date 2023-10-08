@@ -10,6 +10,7 @@ import { FireMarkers } from './FireMarkers';
 import { FirePoints } from './FirePoints';
 import { FireTrackers } from './FireTrackers';
 import styles from './Map.module.css'
+import { MapLegend } from './MapLegend';
 import { fireReportsQuery } from '../api/queries';
 import FireMarkerIcon from '../assets/fireMarker.svg?react'
 
@@ -59,6 +60,7 @@ export const Map: FunctionComponent = () => {
                     className={styles.mapContainer}
                     ref={mapRef}
                 >
+                    <MapLegend />
                     <FireMarkers />
                     <FirePoints date={debouncedDate} />
                     <FireTrackers date={debouncedDate} />
@@ -158,7 +160,7 @@ export const Map: FunctionComponent = () => {
                     size="xl"
                     p={16}
                 >
-                    Fire reports
+                    User fire reports
                 </Text>
                 <List className={styles.list}>
                     <LoadingOverlay visible={fireReports.isLoading} />

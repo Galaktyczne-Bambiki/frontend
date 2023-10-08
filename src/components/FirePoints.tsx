@@ -5,8 +5,12 @@ import { Icon, LatLngBounds } from 'leaflet';
 import { FunctionComponent, useState } from 'react';
 import { Marker, useMapEvent } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import { createClusterCustomIcon } from './CustomClusterIcon';
+import { FirePoint } from '../api/models';
 import { firePointsQuery } from '../api/queries';
-import fireIcon from '../assets/fireMarker.svg'
+import fireHighIcon from '../assets/firePointHighMarker.svg'
+import fireLowIcon from '../assets/firePointLowMarker.svg'
+import fireNominalIcon from '../assets/firePointNominalMarker.svg'
 
 type FirePointsProps = {
 	date: number,
@@ -25,12 +29,28 @@ export const FirePoints: FunctionComponent<FirePointsProps> = ({ date }) => {
         date: format(fromUnixTime(date), 'yyyy-MM-dd')
     }));
 
+    const getMarkerIcon = (confidence: FirePoint['confidence']) => {
+        switch (confidence) {
+        case 'Low':return fireLowIcon
+        case 'Nominal':return fireNominalIcon
+        case 'High':return fireHighIcon
+        }
+    }
+
     return (
         <>
             <LoadingOverlay visible={firePoints.isLoading} />
             <MarkerClusterGroup
                 chunkedLoading
                 showCoverageOnHover
+                iconCreateFunction={createClusterCustomIcon}
+                polygonOptions={{
+                    fillColor: 'rgba(253, 156, 115)',
+                    color: 'rgba(241, 128, 23)',
+                    weight: 3,
+                    opacity: 1,
+                    fillOpacity: 0.6,
+                }}
             >
                 {firePoints.data?.map(({ confidence, latitude, longitude }, index) => (
                     <Marker
@@ -40,7 +60,7 @@ export const FirePoints: FunctionComponent<FirePointsProps> = ({ date }) => {
                             lng: longitude
                         }}
                         icon={new Icon({
-                            iconUrl: fireIcon,
+                            iconUrl: getMarkerIcon(confidence),
                             iconAnchor: [16, 16]
                         })}
                         title={confidence}

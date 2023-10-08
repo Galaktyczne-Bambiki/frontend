@@ -5,8 +5,9 @@ import { Icon } from 'leaflet';
 import { FunctionComponent } from 'react';
 import { Marker } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import { createClusterCustomIcon } from './CustomClusterIcon';
 import { fireTrackersQuery } from '../api/queries';
-import fireIcon from '../assets/fireMarker.svg'
+import fireIcon from '../assets/fireTrackerMarker.svg'
 
 type FireTrackersProps = {
 	date: number,
@@ -21,6 +22,7 @@ export const FireTrackers: FunctionComponent<FireTrackersProps> = ({ date }) => 
             <MarkerClusterGroup
                 chunkedLoading
                 showCoverageOnHover
+                iconCreateFunction={createClusterCustomIcon}
             >
                 {fireTrackers.data?.map(({ celsiusValue, latitude, longitude }, index) => (
                     <Marker
@@ -33,7 +35,7 @@ export const FireTrackers: FunctionComponent<FireTrackersProps> = ({ date }) => 
                             iconUrl: fireIcon,
                             iconAnchor: [16, 16]
                         })}
-                        title={celsiusValue.toString()}
+                        title={`Measured temperature: ${celsiusValue}°C`}
                     />
                 ))}
             </MarkerClusterGroup>

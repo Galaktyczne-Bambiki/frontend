@@ -4,6 +4,7 @@ import { Icon } from 'leaflet';
 import { FunctionComponent } from 'react';
 import { Popup, Marker } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import { createClusterCustomIcon } from './CustomClusterIcon';
 import styles from './FireMarkers.module.css'
 import { fireReportsQuery } from '../api/queries';
 import fireIcon from '../assets/fireMarker.svg'
@@ -17,6 +18,7 @@ export const FireMarkers: FunctionComponent = () => {
             <MarkerClusterGroup
                 chunkedLoading
                 showCoverageOnHover
+                iconCreateFunction={createClusterCustomIcon}
             >
                 {fireReports.data?.map(({ description, fireReportId, latitude, longitude }) => (
                     <Marker
