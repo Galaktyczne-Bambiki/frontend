@@ -1,9 +1,9 @@
-import { LoadingOverlay } from '@mantine/core';
+import { LoadingOverlay, Text } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import { format, fromUnixTime } from 'date-fns';
 import { Icon, LatLngBounds } from 'leaflet';
 import { FunctionComponent, useState } from 'react';
-import { Marker, useMapEvent } from 'react-leaflet';
+import { Marker, useMapEvent, Popup } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster'
 import { createClusterCustomIcon } from './CustomClusterIcon';
 import { FirePoint } from '../api/models';
@@ -64,7 +64,15 @@ export const FirePoints: FunctionComponent<FirePointsProps> = ({ date }) => {
                             iconAnchor: [16, 16]
                         })}
                         title={confidence}
-                    />
+                    >
+                        <Popup>
+                            <Text>
+                                Fire confidence:
+                                {' '}
+                                {confidence}
+                            </Text>
+                        </Popup>
+                    </Marker>
                 ))}
             </MarkerClusterGroup>
         </>
