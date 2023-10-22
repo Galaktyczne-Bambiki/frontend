@@ -1,6 +1,6 @@
 # FIRMS Explorer Frontend
 
-The FIRMS Explorer Frontend is a user interface for the FIRMS (Fire Information for Resource Management System) platform, utilizing data provided by NASA. This application was created using the React framework and allows users to interact with fire data, gaining valuable insights into wildfire incidents. **App was created for he NASA International Space Apps Challenge 2023**.
+The FIRMS Explorer Frontend is a user interface for the FIRMS (Fire Information for Resource Management System) platform, utilizing data provided by NASA. This application was created using the React framework and allows users to interact with fire data, gaining valuable insights into wildfire incidents. **App was created for the NASA International Space Apps Challenge 2023**.
 
 ## Features
 
